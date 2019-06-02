@@ -8,9 +8,13 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gauravmahto/go-webserver/router"
+	//"github.com/gauravmahto/go-webserver/framework/router"
 	"github.com/gauravmahto/go-start/utils"
 )
+
+type Server struct {
+	
+}
 
 // Server Server entry point.
 func Server() {
