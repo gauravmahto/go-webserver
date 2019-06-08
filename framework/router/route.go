@@ -15,8 +15,25 @@ import (
 type Router struct {
 }
 
+// HTTPVerb Various HTTP methods
+type HTTPVerb string
+
+// HTTP methods
+const (
+	MethodGet     HTTPVerb = "GET"
+	MethodHead    HTTPVerb = "HEAD"
+	MethodPost    HTTPVerb = "POST"
+	MethodPut     HTTPVerb = "PUT"
+	MethodPatch   HTTPVerb = "PATCH"
+	MethodDelete  HTTPVerb = "DELETE"
+	MethodConnect HTTPVerb = "CONNECT"
+	MethodOptions HTTPVerb = "OPTIONS"
+	MethodTrace   HTTPVerb = "TRACE"
+)
+
 // RegisterRouteArgs Arguments for RegisterRoute functions.
 type RegisterRouteArgs struct {
+	verb    HTTPVerb
 	paths   []string
 	handler http.HandlerFunc
 }
@@ -28,7 +45,7 @@ func RegisterGet(args RegisterRouteArgs) {
 
 	handler := func(responseW http.ResponseWriter, request *http.Request) {
 
-		if http.MethodGet == request.Method {
+		if args.verb == HTTPVerb(request.Method) {
 
 			args.handler(responseW, request)
 
